@@ -41,11 +41,10 @@ public class AppleFinder {
     /**
      * findGreenApplesByColor method that creates a new list of apples based on the color required.
      *
-     * @param apples represents a list of apples
      * @return a new list of apples with the requirements that were requested
      */
-    public ArrayList<Apple> findGreenApplesByColor(ArrayList<Apple> apples) {
-        return (ArrayList<Apple>) apples.stream()
+    public ArrayList<Apple> findGreenApplesByColor() {
+        return (ArrayList<Apple>) this.find().stream()
                 .filter(a -> a.color().equals("green"))
                 .collect(Collectors.toList());
     }
@@ -53,12 +52,11 @@ public class AppleFinder {
     /**
      * findApplesByColor method that creates a new list of apples based on the requirements of the parameter values.
      * In this case it is necessary to filter by color.
-     * @param apples represents a list of apples
      * @param color represents color
      * @return a new list of apples with the requirements that were requested
      */
-    public ArrayList<Apple> findApplesByColor(ArrayList<Apple> apples, String color) {
-        return (ArrayList<Apple>) apples.stream()
+    public ArrayList<Apple> findApplesByColor(String color) {
+        return (ArrayList<Apple>) this.find().stream()
                 .filter(a -> a.color().equals(color))
                 .collect(Collectors.toList());
     }
@@ -67,12 +65,11 @@ public class AppleFinder {
      * findApplesByWeight method that creates a new list of apples based on the requirements of the parameter values.
      * In this case it is necessary to filter by weight.
      *
-     * @param apples represents a list of apples
      * @param weight represents weight
      * @return a new list of apples with the requirements that were requested
      */
-    public ArrayList<Apple> findApplesByWeight(ArrayList<Apple> apples, Double weight) {
-        return (ArrayList<Apple>) apples.stream()
+    public ArrayList<Apple> findApplesByWeight(Double weight) {
+        return (ArrayList<Apple>) this.find().stream()
                 .filter(a -> a.weight() > weight)
                 .collect(Collectors.toList());
     }
@@ -82,13 +79,12 @@ public class AppleFinder {
      * values.
      * In this case it is necessary to filter by color and weight.
      *
-     * @param apples represents a list of apples
      * @param color represents color
      * @param weight represents weight
      * @return a new list of apples with the requirements that were requested
      */
-    public ArrayList<Apple> findApplesByWeightAndColor(ArrayList<Apple> apples, String color, Double weight) {
-        return (ArrayList<Apple>) apples.stream()
+    public ArrayList<Apple> findApplesByWeightAndColor(String color, Double weight) {
+        return (ArrayList<Apple>)  this.find().stream()
                 .filter(a -> a.weight() > weight)
                 .filter(a -> a.color().equals(color))
                 .collect(Collectors.toList());
