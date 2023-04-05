@@ -64,6 +64,26 @@ public class AppleNotFound extends DomainError {
 }
 ```
 
+### services
+```java
+@Service
+public class AppleFinder {
+    private final AppleRepository repository;
+
+    public AppleFinder(AppleRepository repository) {
+        this.repository = repository;
+    }
+
+    public ArrayList<Apple> find() {
+        var apples = repository.searchAll();
+
+        if (apples.filter(ArrayList::isEmpty).isPresent()) throw new AppleNotFound();
+
+        return apples.get();
+    }
+}
+```
+
 ### infrastructure - persistence
 
 ```java
@@ -90,10 +110,10 @@ public class InMemoryAppleRepository implements AppleRepository {
 ```java
 public class GetApplesConsole {
 public static void main(String[] args) {
-try {
-var repository = new InMemoryAppleRepository();
-var services = new AppleFinder(repository);
-var apples = services.find();
+    try {
+        var repository = new InMemoryAppleRepository();
+        var services = new AppleFinder(repository);
+        var apples = services.find();
 
           System.out.println(apples);
 
