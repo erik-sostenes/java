@@ -9,13 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class AppleFinder {
+public class AppleFinder extends FruitFilterHandler {
     private final FruitRepository<Apple> repository;
-    private final FruitFilterHandler fruitFilterHandler;
 
     public AppleFinder(FruitRepository<Apple> repository) {
         this.repository = repository;
-        this.fruitFilterHandler = new FruitFilterHandler();
     }
 
     public ArrayList<Apple> find() {
@@ -27,7 +25,7 @@ public class AppleFinder {
     }
 
    public ArrayList<Apple> findByColor(String color) {
-       var apples = this.fruitFilterHandler.filter(this.find(), new AppleColorPredicate(color));
+       var apples = filter(this.find(), new AppleColorPredicate(color));
 
        if (apples.filter(ArrayList::isEmpty).isPresent())
            throw new FruitNoContent(color);
@@ -36,7 +34,7 @@ public class AppleFinder {
     }
 
     public ArrayList<Apple> findByWeight(Integer weight) {
-        var apples = this.fruitFilterHandler.filter(this.find(), new AppleWeightPredicate(weight));
+        var apples = filter(this.find(), new AppleWeightPredicate(weight));
 
         if(apples.filter(ArrayList::isEmpty).isPresent())
             throw new FruitNoContent(weight.toString());
