@@ -109,24 +109,26 @@ public class InMemoryAppleRepository implements AppleRepository {
 
 ```java
 public class GetApplesConsole {
-public static void main(String[] args) {
-    try {
-        var repository = new InMemoryAppleRepository();
-        var services = new AppleFinder(repository);
-        var apples = services.find();
+    public static void main(String[] args) {
+        try {
+            var repository = new InMemoryAppleRepository();
+            var services = new AppleFinder(repository);
+            var apples = services.find();
 
-          System.out.println(apples);
+            System.out.println(apples);
 
-          System.out.println(services.findGreenApplesByColor(apples));
+            System.out.println(services.findGreenApplesByColor());
 
-          System.out.println(services.findApplesByColor(apples, "yellow"));
+            System.out.println(services.findApplesByColor("yellow"));
 
-          System.out.println(services.findApplesByWeight(apples, 150D));
+            System.out.println(services.findApplesByWeight(150D));
 
-          System.out.println(services.findApplesByWeightAndColor(apples, "green", 150D));
+            System.out.println(services.findApplesByWeightAndColor("green", 150D));
+
         }catch (AppleNotFound e) {
-           System.out.println(e.errorMessage());
+            System.out.println(e.errorMessage());
         }
     }
 }
+
 ```
